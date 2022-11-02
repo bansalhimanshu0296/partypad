@@ -58,7 +58,7 @@ export default function Login() {
   const onSubmit = () =>{
     if(isCaptchaVerfied || captchaRef === null){
         let encrypt_password = bcrypt.hashSync(password, "$2a$10$CwTycUXWue0Thq9StjUM0u")
-        axios.post("http://" +process.env.REACT_APP_VM_IP+":8000/app/Submit_Login",{
+        axios.post("https://" +process.env.REACT_APP_VM_IP+":8000/app/Submit_Login",{
           email: userName,
           password: encrypt_password,
           role: userWPType,
@@ -105,7 +105,7 @@ export default function Login() {
           let user = ""
           if(res.status === 200){
           user = res.data.email
-          axios.post("http://"+process.env.REACT_APP_VM_IP+":8000/app/Submit_Login",{
+          axios.post("https://"+process.env.REACT_APP_VM_IP+":8000/app/Submit_Login",{
           email: res.data.email,
           password: "",
           role: userOAType,
