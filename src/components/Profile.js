@@ -16,7 +16,9 @@ import { checkIfNumber } from "./validation";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Rating from '@mui/material/Rating';
-
+import images from '../img/images.jpeg'
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
 
 const Alert = React.forwardRef ((
     props,
@@ -29,6 +31,7 @@ const Alert = React.forwardRef ((
 export default function Profile(){
     let [fname, setFname] = useState("");
     let [lname, setLname] = useState("");
+    let [profileImage, setProfileImage] = useState("");
     let [addressLine1, setaddressLine1] = useState("");
     let [addressLine2, setaddressLine2] = useState("");
     let [states, setStates] = useState([{value:"", label:"--"}])
@@ -84,10 +87,15 @@ export default function Profile(){
         })
         let state = ""
         let city = ""
-        axios.post("http://"+process.env.REACT_APP_VM_IP+":8000/app/Fetch_Profile",{
+        axios.post("https://cors-everywhere.herokuapp.com/http://"+process.env.REACT_APP_VM_IP+":8000/app/Fetch_Profile",{
             email: user
         }).then(res=>{
             if(res.data.status === "OK"){
+                if(res.data.data.profileImage.length === 0){
+                  setProfileImage(images);
+                }else{
+                  setProfileImage(res.data.data.profileImage[0])
+                }
                 setFname(res.data.data.firstName);
                 setLname(res.data.data.lastName)
                 setBio(res.data.data.profileBio);
@@ -270,6 +278,10 @@ export default function Profile(){
             // if(phone.length === 0){
             //     phone = 0
             // }
+            let image_arr = []
+            if(profileImage !== images){
+              image_arr.push(profileImage)
+            }
             const body={
                 email:localStorage.getItem('user'),
                 firstName:fname,
@@ -283,10 +295,11 @@ export default function Profile(){
                 profilePhone: phone,
                 profileDob: null,
                 profileRating: rating,
-                profileBio: ""
+                profileBio: "",
+                profileImage: image_arr
             }
             console.log(body)
-            axios.post("http://"+process.env.REACT_APP_VM_IP+":8000/app/Add_Profile",body).then(res =>{
+            axios.post("https://cors-everywhere.herokuapp.com/http://"+process.env.REACT_APP_VM_IP+":8000/app/Add_Profile",body).then(res =>{
                 
                 if(res.data.status === "OK"){
                     setErrorMessage("Information for user updated")
@@ -329,7 +342,13 @@ export default function Profile(){
     const onCloseSuccessSnackBar = () =>{
         setIsSuccessSnackBarOpen(false)
     }
-    
+    const onChangePic = (e) =>{
+      if(e.target.files.length === ""){
+        setProfileImage(images)
+      }else{
+       setProfileImage(URL.createObjectURL(e.target.files[0]))
+      }
+    }
     let isButtonDisabled = !(fname.length!==0 && !firstNameError && lname.length!==0 && !lastNameError && (phone.length === 0 || phone.length === 10))
     return(
         <Box style={{paddingTop:"5vh"}}>
@@ -348,7 +367,37 @@ export default function Profile(){
             <Typography component="h1" variant="h5" >
                 Profile Information
             </Typography>
+            <Grid container spacing={2} style={{paddingTop:"5vh"}}>
+              { update &&
+              <Grid container xs={12} direction="column" alignItems="center" sx={{height: "25vh" }} id="profileimage">   
+                
+                <img
+                alt={fname +" "+ lname}
+                src={profileImage}
+                id="image"
+                />
+                <div id="middle">
+                  <div id="text">
+                    <label for="upload-photo">Change Image</label>
+                    <input type='file' id="upload-photo"  onChange={onChangePic}/>
+                  </div>
+                </div>
+            </Grid>}
+            
+            { !update &&
+              <Grid container xs={12} direction="column" alignItems="center" sx={{height: "25vh" }}>   
+            <img
+                alt={fname +" "+ lname}
+                src={profileImage}
+                id="image"
+            />
+
+            </Grid>}
+
+            <Grid xs={12} style={{paddingTop:"1vh"}} >
             <Rating value={rating} readOnly/>
+            </Grid>
+            </Grid>
             </div>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -388,7 +437,6 @@ export default function Profile(){
                 <Grid item xs={12} sm={12}>
                     <TextField
                     margin="normal"
-                    
                     fullWidth
                     value={addressLine1}
                     onChange = {(e) => setaddressLine1(e.target.value)}
@@ -517,20 +565,17 @@ export default function Profile(){
                  
                 </Grid>
                 <Grid item xs={2} sm={2}>
-                <Button
-                fullWidth
-                variant="contained"
-                disabled={isButtonDisabled}
-                onClick ={onUpdate}
-                >
-                    Update
-                </Button>
-                 
+                  <Button
+                  fullWidth
+                  variant="contained"
+                  disabled={isButtonDisabled}
+                  onClick ={onUpdate}
+                  >
+                      Update
+                  </Button>
                 </Grid>
-
             </Grid>
-
-            </Container>
+          </Container>
         </Box>
     )
 

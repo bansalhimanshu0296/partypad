@@ -76,7 +76,7 @@ export default function Browse(){
               else{
                 setPageNumbers(Math.floor(res.data.data.totalCount/10) + 1)
               }
-              setData(JSON.parse(res.data.data.searchResult))
+              setData(res.data.data.searchResult)
           }
       })
       axios.get("http://" +process.env.REACT_APP_VM_IP+":8000/app/Fetch_Venue_Types").then(res=>{
@@ -238,7 +238,7 @@ const onChangePeopleCount = (e)=>{
           else{
             setPageNumbers(Math.floor(res.data.data.totalCount/10) + 1)
           }
-          setData(JSON.parse(res.data.data.searchResult))
+          setData(res.data.data.searchResult)
       }else{
         console.log("Server Error")
       }
