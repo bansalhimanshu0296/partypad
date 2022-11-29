@@ -17,18 +17,17 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
-import {useGoogleLogin} from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Session from "react-session-api";
 import { useNavigate } from 'react-router';
 
 
-const Alert = React.forwardRef ((
+const Alert = React.forwardRef((
   props,
   ref,
-) =>{
+) => {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
@@ -36,7 +35,7 @@ const Alert = React.forwardRef ((
 const theme = createTheme();
 
 export default function Login() {
-  let [userName, setUserName] =  useState("")
+  let [userName, setUserName] = useState("")
   let [password, setPassword] = useState("")
   let [isCaptchaVerfied, setIsCapthaVerified] = useState(false)
   let [isSnackBarOpen, setIsSnackBarOpen] = useState(false)
@@ -45,118 +44,112 @@ export default function Login() {
   let [userOAType, setUserOAType] = useState("Member")
   let captchaRef = useRef(null)
   const navigate = useNavigate()
-  
 
-  useEffect(()=>{
-    if(localStorage.getItem('user').length !== 0){
-      if(localStorage.getItem('role') === "Owner")
-        navigate("/profile")
-      else
-      navigate("/browser")
+
+  useEffect(() => {
+    if (localStorage.getItem('user') !== null && localStorage.getItem('user').length !== 0) {
+      navigate("/dashboard")
     }
-  })
-  const onSubmit = () =>{
-    if(isCaptchaVerfied || captchaRef === null){
-        let encrypt_password = bcrypt.hashSync(password, "$2a$10$CwTycUXWue0Thq9StjUM0u")
-        axios.post("https://cors-everywhere.herokuapp.com/http://" +process.env.REACT_APP_VM_IP+":8000/app/Submit_Login",{
-          email: userName,
-          password: encrypt_password,
-          role: userWPType,
-          loginType: "WebPage"
+  },[])
+  const onSubmit = () => {
+    if (isCaptchaVerfied || captchaRef === null) {
+      let encrypt_password = bcrypt.hashSync(password, "$2a$10$CwTycUXWue0Thq9StjUM0u")
+      axios.post(process.env.REACT_APP_VM_IP + "/app/Submit_Login", {
+        email: userName,
+        password: encrypt_password,
+        role: userWPType,
+        loginType: "WebPage"
 
-        }).then(res=>{
-          if(res.data.status === "OK"){
-            //Session.set("user", userName)
-            //Session.set("role", userWPType)
-            localStorage.setItem("user", userName)
-            localStorage.setItem("role", userWPType)
-            if(userWPType === "Owner")
-              navigate("/profile")
-            else
-              navigate("/browser")
-          }
-          else if(res.data.status === "FAIL"){
-            setErrorMessage("Invalid Credentials(username, password or role)")
-            setIsSnackBarOpen(true)
-          }
-          else{
-            setErrorMessage("Server Error")
-            setIsSnackBarOpen(true)
-          }
-        }).catch((e)=>{
-          console.log(e)
-        })
-        
-    }else{
+      }).then(res => {
+        if (res.data.status === "OK") {
+          //Session.set("user", userName)
+          //Session.set("role", userWPType)
+
+          localStorage.setItem("user", userName)
+          localStorage.setItem("role", userWPType)
+          navigate("/dashboard")
+        }
+        else if (res.data.status === "FAIL") {
+          setErrorMessage("Invalid Credentials(username, password or role)")
+          setIsSnackBarOpen(true)
+        }
+        else {
+          setErrorMessage("Server Error")
+          setIsSnackBarOpen(true)
+        }
+      }).catch((e) => {
+        setErrorMessage("Server Error")
+        setIsSnackBarOpen(true)
+      })
+
+    } else {
       setErrorMessage("Please verify the captcha")
       setIsSnackBarOpen(true)
     }
-      
+
   }
   const googleLogin = useGoogleLogin({
     onSuccess: async tokenResponse => {
       // fetching userinfo can be done on the client or the server
-      
+
       axios
         .get('https://www.googleapis.com/oauth2/v3/userinfo', {
           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
         })
         .then(res => {
           let user = ""
-          if(res.status === 200){
-          user = res.data.email
-          axios.post("https://cors-everywhere.herokuapp.com/http://"+process.env.REACT_APP_VM_IP+":8000/app/Submit_Login",{
-          email: res.data.email,
-          password: "",
-          role: userOAType,
-          loginType: "OAuth"
+          if (res.status === 200) {
+            user = res.data.email
+            axios.post(process.env.REACT_APP_VM_IP + "/app/Submit_Login", {
+              email: res.data.email,
+              password: "",
+              role: userOAType,
+              loginType: "OAuth"
 
-        }).then(res=>{
-          if(res.data.status === "OK"){
-            //Session.set("user", user)
-            //Session.set("role", userOAType)
-            localStorage.setItem("user", user)
-            localStorage.setItem("role", userOAType)
-            if(userOAType === "Owner")
-              navigate("/profile")
-            else
-            navigate("/browser")
-          }
-          else if(res.data.status === "FAIL"){
-            setErrorMessage("Invalid Credentials(username, password or role)")
-            setIsSnackBarOpen(true)
-          }
-          else{
-            setErrorMessage("Server Error")
-            setIsSnackBarOpen(true)
-          }
-        }).catch((e)=>{
-          console.log(e)
-        })
+            }).then(res => {
+              if (res.data.status === "OK") {
+                //Session.set("user", user)
+                //Session.set("role", userOAType)
+                localStorage.setItem("user", user)
+                localStorage.setItem("role", userOAType)
+                navigate("/dashboard")
+              }
+              else if (res.data.status === "FAIL") {
+                setErrorMessage("Invalid Credentials(username, password or role)")
+                setIsSnackBarOpen(true)
+              }
+              else {
+                setErrorMessage("Server Error")
+                setIsSnackBarOpen(true)
+              }
+            }).catch((e) => {
+              setErrorMessage("Server Error")
+              setIsSnackBarOpen(true)
+            })
           }
         });
     },
   });
-  const onChange = (token) =>{
-    if(token == null){
+  const onChange = (token) => {
+    if (token == null) {
       setIsCapthaVerified(false)
-    }else{
+    } else {
       setIsCapthaVerified(true)
     }
   }
-  const onChangeWPUser = (e) =>{
+  const onChangeWPUser = (e) => {
     setUserWPType(e.target.value)
   }
-  const onChangeOAUser = (e) =>{
+  const onChangeOAUser = (e) => {
     setUserOAType(e.target.value)
   }
-  const onCloseSnackBar = () =>{
+  const onCloseSnackBar = () => {
     setIsSnackBarOpen(false)
   }
-  let isButtonDisabled = !(userName.length!==0 && password.length!==0);
+  let isButtonDisabled = !(userName.length !== 0 && password.length !== 0);
   return (
     <ThemeProvider theme={theme}>
-      <Snackbar open={isSnackBarOpen} autoHideDuration={6000} anchorOrigin ={{vertical: 'top', horizontal: 'center'}} onClose={onCloseSnackBar}>
+      <Snackbar open={isSnackBarOpen} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={onCloseSnackBar}>
         <Alert onClose={onCloseSnackBar} severity="error" sx={{ width: '100%' }}>
           {errorMessage}
         </Alert>
@@ -165,11 +158,12 @@ export default function Login() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 3,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
+          style ={{height: "81.5vh", overflowY:"scroll"}}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
@@ -178,13 +172,13 @@ export default function Login() {
             Sign in
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
-          
+
             <TextField
               margin="normal"
               required
               fullWidth
               value={userName}
-              onChange = {(e) => setUserName(e.target.value)}
+              onChange={(e) => setUserName(e.target.value)}
               id="username"
               label="Email ID"
             />
@@ -193,61 +187,61 @@ export default function Login() {
               required
               fullWidth
               value={password}
-              onChange = {(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               name="password"
               label="Password"
               type="password"
               id="password"
             />
-             <RadioGroup
+            <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
-              onChange = {onChangeWPUser}
-              value = {userWPType}
+              onChange={onChangeWPUser}
+              value={userWPType}
             >
 
               <FormControlLabel value="Member" control={<Radio />} label="Member" />
               <FormControlLabel value="Owner" control={<Radio />} label="Venue Owner" />
-      
+
             </RadioGroup>
-             <ReCAPTCHA
+            <ReCAPTCHA
               sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
               onChange={onChange}
               ref={captchaRef}
-              style ={{width: "100%"}}
-              
+              style={{ width: "100%" }}
+
             />
-           
+
             <Button
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick ={onSubmit}
-              disabled ={isButtonDisabled}
+              onClick={onSubmit}
+              disabled={isButtonDisabled}
             >
               Sign In
             </Button>
             <Divider sx={{ my: 3 }} >
               OR
-           </Divider>
-           <RadioGroup
+            </Divider>
+            <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
-              onChange = {onChangeOAUser}
-              value = {userOAType}
+              onChange={onChangeOAUser}
+              value={userOAType}
             >
 
               <FormControlLabel value="Member" control={<Radio />} label="Member" />
               <FormControlLabel value="Owner" control={<Radio />} label="Venue Owner" />
-      
+
             </RadioGroup>
             <Button
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick ={googleLogin}
+              onClick={googleLogin}
             >
               Sign In with Google
             </Button>
@@ -265,7 +259,7 @@ export default function Login() {
             </Grid>
           </Box>
         </Box>
-       
+
       </Container>
     </ThemeProvider>
   );

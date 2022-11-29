@@ -7,22 +7,23 @@ import venue from '../img/venue.jpg'
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
+import { Link } from '@mui/material';
 
 
 
 
-export default function Venue(props) {
+export default function OwnerVenue(props) {
   const navigate = useNavigate()
   let image = venue
   if (props.venue.Venue.venue_image.length !== 0) {
     image = props.venue.Venue.venue_image[0]
   }
   const getVenueInformation = () => {
-    navigate("/venueInformation", { state: props.venue })
+    navigate("/editvenue", { state: {venue:props.venue, view:"view"} })
 
   }
   return (
-    <Card style={{ marginTop: "1.5vh", cursor: "pointer" }} onClick={getVenueInformation}>
+    <Card style={{ marginTop: "1.5vh", cursor: "pointer" }}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={3}>
           <CardMedia
@@ -32,10 +33,10 @@ export default function Venue(props) {
             alt={props.venue.Venue.venue_name}
           />
         </Grid>
-        <Grid item xs={12} sm={7}>
+        <Grid item xs={12} sm={6}>
           <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: "auto", textAlign: "left" }}>
             <CardContent sx={{ flex: '1 0 auto' }}>
-              <Typography component="div" variant="h5" >
+              <Typography component="div" variant="h5" onClick={getVenueInformation}>
                 {props.venue.Venue.venue_name}
               </Typography>
               {
@@ -61,12 +62,15 @@ export default function Venue(props) {
             </CardContent>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={2}>
-          <Typography component="div" variant="h5" >{"$"+props.venue.Venue.venue_price}</Typography>
+        <Grid item xs={12} sm={3}>
+            <Typography component="div" variant="h5" >{"$"+props.venue.Venue.venue_price}</Typography>
+            <Typography style={{paddingTop:"40%"}}>
+                <Link style={{textDecoration:"none"}} onClick={()=>{navigate("/editvenue", { state: {venue:props.venue, view:"edit"} })
+}}>Edit Venue</Link>
+                <Link style={{textDecoration:"none"}} onClick={()=>props.onRemoveVenue(props.venue.Venue.venue_id)}>&nbsp;&nbsp;Remove Venue</Link>
+            </Typography>
         </Grid>
       </Grid>
-      {/* <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-      </Box> */}
     </Card>
   )
 }
