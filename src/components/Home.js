@@ -18,15 +18,25 @@ export default function Home() {
 
                         typewriter
 
-                            .typeString("Party Pad")
-
-                            .pauseFor(1000)
-                            .typeString(" Welcomes You")
-                            .pauseFor(1000)
+                            .typeString("Your Party Starts Here")
+                            .pauseFor(2000)
                             .deleteAll()
-                            .typeString("One Stop for \n")
-                            .pauseFor(1000)
-                            .typeString(" All Party Venues")
+                            .typeString("Plan Your Party NOW")
+                            .pauseFor(2000)
+                            .deleteAll()
+                            .typeString("Want to Throw an EPIC Party")
+                            .pauseFor(2000)
+                            .typeString(" but need a PAD")
+                            .pauseFor(2000)
+                            .deleteAll()
+                            .typeString("SIGN UP Today")
+                            .pauseFor(2000)
+                            .deleteAll()
+                            .typeString("Have a SPACE and need EXTRA CASH")
+                            .pauseFor(2000)
+                            .deleteAll()
+                            .typeString("SIGN UP Today")
+                            .pauseFor(2000)
                             .start();
                     }}
                 />

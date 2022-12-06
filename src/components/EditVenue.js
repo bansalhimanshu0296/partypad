@@ -438,7 +438,7 @@ export default function EditVenue() {
                     <Grid item xs={12} sm={6}>
                         <TextField
                             name="addressline2"
-                            required
+                            
                             fullWidth
                             id="addressline2"
                             label="Address Line 2"
@@ -568,7 +568,7 @@ export default function EditVenue() {
                     <Grid item xs={12} sm={12}>
                         <TextField
                             name="desc"
-                            required
+
                             fullWidth
                             id="des"
                             label="Description"
