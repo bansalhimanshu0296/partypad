@@ -96,7 +96,7 @@ export default function Inbox() {
                     ))}
                 </Grid>
                 <Grid items xs={9}>
-                    {chatUser !== 0 && <Chat user={chatUser} getmessages={getmessages} userName={chatUserName} unread={unreadChat} style={{ width: "100%" }} />}
+                    {chatUser !== 0 && <Chat user={chatUser} getmessages={getmessages} userName={chatUserName} unread={unreadChat} setUnread={setUnreadChat} style={{ width: "100%" }} />}
                 </Grid>
 
             </Grid>

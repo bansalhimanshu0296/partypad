@@ -385,6 +385,10 @@ export default function VenueInformation() {
                             <Container>
                                 <Typography component="h2" variant="h6" >
                                     {props.Venue.venue_price !== "" && "$" + props.Venue.venue_price}
+                                    {props.Venue.venue_price === "" && "$0"}
+                                </Typography>
+                                <Typography variant="caption" display="block" gutterBottom>
+                                    <sup>*</sup> Taxes & Cleaning Fess may be applicable
                                 </Typography>
                                 <LocalizationProvider
                                     dateAdapter={AdapterDayjs}

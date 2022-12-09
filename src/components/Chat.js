@@ -14,7 +14,7 @@ const Alert = React.forwardRef((
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Chat = React.memo(({ userName, getmessages, user, unread }) => {
+const Chat = React.memo(({ userName, getmessages, user, unread, setUnread }) => {
     let [chat, setChat] = useState({})
     let [unreadChat, setUnreadChat] = useState({})
     let chatTimer = null
@@ -29,7 +29,7 @@ const Chat = React.memo(({ userName, getmessages, user, unread }) => {
         return () => {
             clearInterval(chatTimer)
         }
-    }, [user])
+    }, [user, unread])
 
     const getChat = () => {
         let body = {
@@ -91,6 +91,8 @@ const Chat = React.memo(({ userName, getmessages, user, unread }) => {
             axios.post(process.env.REACT_APP_VM_IP + "/app/Send_Message", body).then(res => {
                 if (res.data.status === "OK") {
                     setChatMessage("")
+                    setUnread(0)
+                    
                 } else {
                     setErrorMessage(res.data.message)
                     setIsErrorSnackBarOpen(true)
