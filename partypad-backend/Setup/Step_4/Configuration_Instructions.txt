@@ -1,0 +1,12 @@
+Edit the .env file (located in team33-partypad\) as follows:
+
+DB_NAME - The Name of your Database
+DB_USER - Username for the Database Connection
+DB_PASSWORD - Password for the Database Connection
+DB_HOST - Host/URL for the Database connection
+DB_DIALECT - Set this to "POSTGRESQL" for now
+DB_MULTI_SCHEMA - If the Database has multiple schemas within set to "True" else "False"
+DB_SCHEMA - If DB_MULTI_SCHEMA is set to "True" then enter the Schema name else blank ""
+DB_MIGRATION - To migrate changes to the Database set to "ON" NOTE: PLEASE SET THIS TO "OFF" WHEN NO MIGRATIONS HAVE TO BE MADE
+EXTERNAL_IP - Enter the VM's External IP Address (Can be found on AWS instance info)
+INTERNAL_IP - Enter the VM's Internal IP Address (Can be found on AWS instance info)

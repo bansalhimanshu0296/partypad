@@ -1,0 +1,11 @@
+Make sure youv'e modified the .env file appropriately to connect to the Database, else this step will fail!
+
+Once the .env file has been configured, run the following command:
+
+"sh final_setup.sh"
+
+
+
+The server can be started by running the following command in team33-partypad\partypad-backend\Server\:
+
+"sh start_server.sh"

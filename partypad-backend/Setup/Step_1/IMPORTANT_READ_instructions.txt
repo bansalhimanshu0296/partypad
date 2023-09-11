@@ -1,0 +1,5 @@
+Run the following command in the terminal in this folder:
+
+"sh install_miniconda.sh"
+
+Close and re-open the terminal

@@ -1,0 +1,7 @@
+Activate the virtual environment by running the following command (If you havent activated it yet):
+
+"conda activate se-env"
+
+Run the following command in the terminal in this folder:
+
+"sh initial_setup.sh"

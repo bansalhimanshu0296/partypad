@@ -205,7 +205,7 @@ export default function PasswordRecovery(props) {
   }
   const onSubmitPassword = () => {
     let encrypt_password = bcrypt.hashSync(password, "$2a$10$CwTycUXWue0Thq9StjUM0u")
-    axios.post( process.env.REACT_APP_VM_IP + ":8000/app/Update_Password", {
+    axios.post( process.env.REACT_APP_VM_IP + "/app/Update_Password", {
       email: userName,
       password: encrypt_password
     }).then(res => {

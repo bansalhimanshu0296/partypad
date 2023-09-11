@@ -1,0 +1,38 @@
+user,name,description,creationDate,modifiedDate,size,type,peopleCount,price,line1,line2,city,state,zip
+2,Oh glorious spring!,,8/22/2022,9/25/2022,1003.92,Cottage,7,164.35,208 Michael Ferry,Apt. 674,Laurabury,NE,37010
+2,Sunny room+Pvte office in huge loft,,10/25/2022,10/30/2022,703.88,Apartment,6,155.24,188 Johnson Views,Suite 079,Lake Kathleen,CA ,48958
+2,The Vernon,,8/27/2022,10/4/2022,983.93,Empty Lot,7,160.03,9127 Elizabeth Stravenue,,Danieltown,WI,6482
+2,Columbia Castle 2 BR,,8/5/2022,10/10/2022,2588.69,Cottage,15,231.77,7796 Joseph Burg,,Danielsside ,RI,70370
+2,Bienvenue,,9/16/2022,9/17/2022,1505.48,Club,10,175.7,8781 Olivia Port,Apt. 225,Thompsonside,VT,22884
+2,Comfortable. Spacious. Private Room.,,7/15/2022,9/27/2022,2557.55,Apartment,15,216.97,06039 Jennifer Islands,Apt. 443,Tracyport,KS,16077
+2,Modern Condo,,10/2/2022,10/26/2022,2622.56,Townhouse,15,205.34,4759 Daniel Shoals,Suite 442,Nguyenburgh,CO,20247
+2,Ideal Brownstone Apartment,,8/29/2022,9/3/2022,1038.52,Apartment,7,148.14,972 Joyce Viaduct,,Lake William,TN,17778
+2,Great Location for NYC,,7/23/2022,10/3/2022,2149.64,Empty Lot,13,207.28,65884 Johns Valley,Apt. 621,Ethanbury,NY,7783
+2,Private Entrance - Private Parking,,8/30/2022,10/20/2022,2715.68,Club,16,232.45,2276 Riley Flats,Suite 975,Johnmouth,NH,39983
+3,A Cozy Oasis,,7/25/2022,9/11/2022,2008.23,Townhouse,12,216.58,6368 John Motorway,Suite 700,Janetbury,NM,26854
+3,"Sunny, Spacious Studio",,7/27/2022,9/13/2022,2841.6,Apartment,16,249.13,911 Castillo,Park Apt. 717,Davisborough,PW,78603
+3,Exposed Brick Loft,,9/16/2022,9/27/2022,2002.03,Basement,12,172.72,209 Natasha Stream,Suite 961,Huffmanland,NE,52457
+3,Bright Modern Charming Housebarge,,10/4/2022,10/15/2022,2929.93,Cottage,17,234.88,829 Welch Track,Apt. 992,North John,AR,26532
+3,The Lenox,,10/4/2022,10/24/2022,1290.43,Apartment,8,156.4,156 Conner Lane,,East Brittany,MI,26733
+3,Peaceful Room…,,10/11/2022,10/22/2022,1300.68,Apartment,9,158.59,2278 Shannon View,,North Carriemouth,NM,84617
+3,Great for parties!,,7/13/2022,10/23/2022,1456.99,Warehouse,9,162.42,064 Hayley Unions,,Nicholsborough,HI,44161
+3,Greenpoint Waterfront Loft,,7/7/2022,10/9/2022,2254.14,Townhouse,13,180.99,5498 Rachel Locks,,New Gregoryshire,PW,54755
+2,Boho Chic Rhapsody,,7/16/2022,7/24/2022,2680.12,Apartment,15,242.83,4930 James Flats,,New Shannon,NJ,75829
+2,Quick Sunny Retreat,,9/20/2022,10/25/2022,2406.07,Cabin,14,207.1,19696 Benjamin Cape,,Stephentown,ME,36952
+2,Forest view with Hot Tub,,10/25/2022,10/27/2022,2962.79,Cabin,17,258.06,030 Larry Park,Suite 665,Thomashaven,HI,87941
+3,Sheridan,,8/12/2022,9/15/2022,903.43,Apartment,9,120.03,5900 N Sheridan Road,,Chicago,IL,60660
+2,The Atrium,,10/5/2022,10/20/2022,1622.56,Townhouse,10,131.57,131 W Newton St,,Boston,MA,02118
+2,TheUltra Lot,,6/27/2022,9/4/2022,1849.62,Empty Lot,11,170.5,1116 15th St,,Sacramento,CA,95814
+2,Uptown,,8/25/2022,9/10/2022,2929.93,Empty Lot,19,228.09,2828 Lemmon Ave E,,Dallas,TX,75204
+3,The Mezzanin,,9/16/2022,9/23/2022,5019.93,Warehouse,100,505.34,135 Freeport St,,Boston,MA,02122
+3,SPIN,,6/15/2022,8/27/2022,4622.56,Club,60,448.14,30 Melcher St,,Boston,MA,02210
+2,Modern Cabin,,10/2/2022,11/7/2022,2557.55,Cabin,15,225.56,425 Foss St,,Healdsburg,CA,95448
+2,Hillside Cabin,,8/29/2022,9/23/2022,1305.78,Cabin,10,150.45,135 Gough Street,,San Francisco,CA,94102
+2,Old Sugar Mill,,7/15/2022,10/3/2022,4542.12,Club,50,400,35266 Willow Ave,,Clarksburg,CA,95612
+3,West End,,8/24/2022,10/12/2022,2002.03,Basement,30,169.69,2728 Hood St,,Dallas,TX,75219
+3,The Pavilion,,7/22/2022,9/1/2022,2841.6,Apartment,16,204.58,5035 S East End Ave,,Chicago,IL,60615
+3,Buckingham,,6/13/2022,9/3/2022,1038.52,Apartment,10,218.04,555 W Madison St,,Chicago,IL,60661
+2,Commerical Lot,,9/16/2022,9/12/2022,2009.64,Empty Lot,13,197.28,2828 N Harwood St,,Dallas,TX,
+2,The Balcony Club,,10/24/2022,10/29/2022,3795.68,Club,25,332.75,1825 Abrams Rd,Suite B,Dallas,TX,75214
+3,Sloane,,6/25/2022,8/7/2022,1568.13,Townhouse,10,199.58,4216 Sloane St,Apt. 441,Carrollton,TX,75007
+2,Presidential Towers,,11/2/2022,11/7/2022,2261.4,Apartment,12,209.13,5009 N Sheridan Road,,Chicago,IL,60640
