@@ -1,4 +1,4 @@
-# team33-partypad
+# partypad
 
 Follow all the steps in the Setup folder to finish the setup process for the application.
 
